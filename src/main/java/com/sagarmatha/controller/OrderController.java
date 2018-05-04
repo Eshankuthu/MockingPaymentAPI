@@ -35,10 +35,10 @@ public class OrderController {
     public String checkoutCustomerOrder(@ModelAttribute("paymentForm") PaymentForm paymentForm,@RequestParam("month") String month, @RequestParam("year") String year) {
     	paymentForm.setCardNumber(paymentForm.getCardNumber().replaceAll("\\s",""));
         paymentForm.setCardExpirationDate(month + "/" + year);
-        Integer responseCode = orderservice.doTransaction("111", paymentForm.getCardNumber(),
+        String responseCode = orderservice.doTransaction("111", paymentForm.getCardNumber(),
             paymentForm.getCardExpirationDate(), paymentForm.getCardHolderName(), paymentForm.getCvv(),
             paymentForm.getCardZipcode(), (double) 5000, "4322637205582291");
-        if(responseCode!=1) {
+        if(responseCode.equals("a")){
         	return "submitorder";
         }
 		return "ordersuccess";

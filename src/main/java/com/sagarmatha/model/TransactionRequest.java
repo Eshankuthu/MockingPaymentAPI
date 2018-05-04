@@ -24,6 +24,9 @@ public class TransactionRequest {
 		this.amount = amount;
 		this.dstCardNo = dstCardNo;
 	}
+	public TransactionRequest() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getTxnId() {
 		return txnId;
 	}
@@ -71,6 +74,12 @@ public class TransactionRequest {
 	}
 	public void setDstCardNo(String dstCardNo) {
 		this.dstCardNo = dstCardNo;
+	}
+	@Override
+	public String toString() {
+		return "TransactionRequest [txnId=" + txnId + ", srcCardNo=" + srcCardNo + ", expirationDate=" + expirationDate
+				+ ", nameOnCard=" + nameOnCard + ", CVV=" + CVV + ", zipCode=" + zipCode + ", amount=" + amount
+				+ ", dstCardNo=" + dstCardNo + "]";
 	}
 	
 	

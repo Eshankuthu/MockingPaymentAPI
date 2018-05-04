@@ -16,7 +16,7 @@ public class OrderServiceImpl implements OrderService{
 	private RestTemplate restTemplate = new RestTemplate();
 
 	@Override
-	public Integer doTransaction(String txnId, String srcCardNo, String expirationDate, String nameOnCard, String CVV,
+	public String doTransaction(String txnId, String srcCardNo, String expirationDate, String nameOnCard, String CVV,
 			String zipCode, Double amount, String dstCardNo) {
 		TransactionRequest transactionRequest = new TransactionRequest(txnId, srcCardNo, expirationDate, nameOnCard, CVV, zipCode, amount, dstCardNo);
          
@@ -28,9 +28,9 @@ public class OrderServiceImpl implements OrderService{
 			e.printStackTrace();
 		}
 		
-		Integer resultReceive;
+		String resultReceive;
 		
-		resultReceive=restTemplate.postForObject(uri, transactionRequest,Integer.class);
+		resultReceive=restTemplate.postForObject(uri, transactionRequest,String.class);
 	
 		System.out.println(resultReceive);
 		return resultReceive;
