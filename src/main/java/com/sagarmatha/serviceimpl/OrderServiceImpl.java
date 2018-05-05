@@ -1,5 +1,7 @@
 package com.sagarmatha.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,17 +19,17 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public String doTransaction(String txnId, String srcCardNo, String expirationDate, String nameOnCard, String CVV,
-			String zipCode, Double amount, String dstCardNo) {
+			String zipCode, Double amount, String dstCardNo,List<String> destinatioinscard) {
 		
-		TransactionRequest transactionRequest = new TransactionRequest(txnId, srcCardNo, expirationDate, nameOnCard, CVV, zipCode, amount, dstCardNo);
+		TransactionRequest transactionRequest = new TransactionRequest(txnId, srcCardNo, expirationDate, nameOnCard, CVV, zipCode, amount, dstCardNo,destinatioinscard);
          
-		String sendData;
+	/*	String sendData;
 		try {
 			sendData = JsonConverter.<TransactionRequest>objectToJson(transactionRequest);
 		} catch (JsonProcessingException e) {
 		
 			e.printStackTrace();
-		}
+		}*/
 		
 		String resultReceive;
 		

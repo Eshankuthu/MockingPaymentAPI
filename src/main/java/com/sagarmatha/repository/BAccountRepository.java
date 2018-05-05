@@ -14,7 +14,7 @@ public interface BAccountRepository extends JpaRepository<BAccount, Long> {
 	
 	Long countByCardNo(String cardNo);
 	
-	List<BAccount> findByCardNo(String cardNo);
+	BAccount findByCardNo(String cardNo);
 	
 	
 	/*@Query("SELECT a FROM BAccount a WHERE "

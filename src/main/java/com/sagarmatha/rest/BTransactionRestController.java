@@ -19,6 +19,7 @@ public class BTransactionRestController {
 	
 	@PostMapping(value="/bank/mock/transaction/api")
 	public ResponseEntity<String> doTransaction(@RequestBody String requestString){
+		System.out.println("******************************");
 		 System.out.println("TR - " + requestString);
 		 String receviceresponse = btransactionservice.doTransaction(requestString);
 		return new ResponseEntity<String>(receviceresponse,HttpStatus.OK);

@@ -70,7 +70,13 @@ public class BTransactionServiceImpl implements BTransactionService {
 			usedAmount+=openRequestString.getAmount();
 		     
 			getSrcAccount.setAmount(availableAmount);
+			baccountrepository.save(getSrcAccount);
 			
+			BAccount destinationCard = baccountrepository.findByCardNo(openRequestString.getDstCardNo());
+			double currentAmount = destinationCard.getAmount();
+			currentAmount+=openRequestString.getAmount();
+			destinationCard.setAmount(currentAmount);
+			baccountrepository.save(destinationCard);
 			
 		}
 		

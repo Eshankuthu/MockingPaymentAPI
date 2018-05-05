@@ -1,5 +1,7 @@
 package com.sagarmatha.model;
 
+import java.util.List;
+
 public class TransactionRequest {
 	
 	private String txnId;
@@ -10,10 +12,10 @@ public class TransactionRequest {
     private String zipCode;
     private Double amount;
     private String dstCardNo;
+    private List<String> destinationCard;
 	
-    
 	public TransactionRequest(String txnId, String srcCardNo, String expirationDate, String nameOnCard, String cVV,
-			String zipCode, Double amount, String dstCardNo) {
+			String zipCode, Double amount, String dstCardNo, List<String> destinationCard) {
 		super();
 		this.txnId = txnId;
 		this.srcCardNo = srcCardNo;
@@ -23,6 +25,13 @@ public class TransactionRequest {
 		this.zipCode = zipCode;
 		this.amount = amount;
 		this.dstCardNo = dstCardNo;
+		this.destinationCard = destinationCard;
+	}
+	public List<String> getDestinationCard() {
+		return destinationCard;
+	}
+	public void setDestinationCard(List<String> destinationCard) {
+		this.destinationCard = destinationCard;
 	}
 	public TransactionRequest() {
 		// TODO Auto-generated constructor stub
