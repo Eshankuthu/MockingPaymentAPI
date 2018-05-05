@@ -63,6 +63,7 @@
                         <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm</button>
                     </div>
             </form:form>
+            <h1>${error}</h1>
 
 </body>
 </html>

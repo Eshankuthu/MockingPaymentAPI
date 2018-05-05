@@ -1,6 +1,6 @@
 package com.sagarmatha.model;
 
-public class PaymentForm {
+public class SubmitForm {
 
 	private Integer cardId;
     private String cardType;
@@ -11,7 +11,7 @@ public class PaymentForm {
     private String cvv;
     private String cardZipcode;
 
-    public PaymentForm(){}
+    public SubmitForm(){}
 
     public Integer getCardId() {
         return cardId;

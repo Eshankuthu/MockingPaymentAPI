@@ -24,10 +24,10 @@ public class BAccount {
 
     private String expirationDate;
     
-    @Column(name = "name_on_card")
+    @Column(name = "name")
     private String name;
 
-    private String CVV;
+    private String cvv;
 
     private String zipCode;
 
@@ -43,7 +43,7 @@ public class BAccount {
         this.cardNo = cardNo;
         this.expirationDate = expirationDate;
         this.name = name;
-        this.CVV = CVV;
+        this.cvv = CVV;
         this.zipCode = zipCode;
         this.createdAt = new Date();
     }
@@ -80,15 +80,17 @@ public class BAccount {
         this.name = name;
     }
 
-    public String getCVV() {
-        return CVV;
-    }
+  
 
-    public void setCVV(String CVV) {
-        this.CVV = CVV;
-    }
+    public String getCvv() {
+		return cvv;
+	}
 
-    public String getZipCode() {
+	public void setCvv(String cvv) {
+		this.cvv = cvv;
+	}
+
+	public String getZipCode() {
         return zipCode;
     }
 
@@ -112,10 +114,12 @@ public class BAccount {
         this.createdAt = createdAt;
     }
 
-    @Override
-    public String toString() {
-        return "Account{" + "id=" + id + ", cardNo=" + cardNo + ", expirationDate=" + expirationDate + ", name=" + name + ", CVV=" + CVV + ", zipCode=" + zipCode + ", amount=" + amount + ", createdAt=" + createdAt + '}';
-    }
+	@Override
+	public String toString() {
+		return "BAccount [id=" + id + ", cardNo=" + cardNo + ", expirationDate=" + expirationDate + ", name=" + name
+				+ ", cvv=" + cvv + ", zipCode=" + zipCode + ", amount=" + amount + ", createdAt=" + createdAt + "]";
+	}
 
+   
 
 }

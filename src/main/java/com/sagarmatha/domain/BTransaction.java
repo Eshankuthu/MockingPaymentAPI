@@ -32,9 +32,6 @@ public class BTransaction {
     @Column(name = "UsedAmount", nullable = false)
     private double usedAmount;
     
-    @Column(name = "rsl")
-    private Integer result;
-    
     private Boolean payCash;
     
     private String transactionId;
@@ -46,13 +43,12 @@ public class BTransaction {
     public BTransaction() {
     }
 
-    public BTransaction(String srcCardNo, String dstCardNo, Double transactionAmount, Double availableAmount, Double usedAmount, Integer result, String transactionId) {
+    public BTransaction(String srcCardNo, String dstCardNo, Double transactionAmount, Double availableAmount, Double usedAmount, String transactionId) {
         this.srcCardNo = srcCardNo;
         this.dstCardNo = dstCardNo;
         this.transactionAmount = transactionAmount;
         this.availableAmount = availableAmount;
         this.usedAmount = usedAmount;
-        this.result = result;
         this.transactionId = transactionId;
         this.createdAt = new Date();
     }
@@ -105,14 +101,6 @@ public class BTransaction {
         this.usedAmount = usedAmount;
     }
 
-    public Integer getResult() {
-        return result;
-    }
-
-    public void setResult(Integer result) {
-        this.result = result;
-    }
-
     public Boolean getPayCash() {
         return payCash;
     }
@@ -137,9 +125,15 @@ public class BTransaction {
         this.createdAt = createdAt;
     }
 
-    @Override
-    public String toString() {
-        return "Transaction{" + "id=" + id + ", srcCardNo=" + srcCardNo + ", dstCardNo=" + dstCardNo + ", transactionAmount=" + transactionAmount + ", availableAmount=" + availableAmount + ", usedAmount=" + usedAmount + ", result=" + result + ", payCash=" + payCash + ", transactionId=" + transactionId + ", createdAt=" + createdAt + '}';
-    }
+	@Override
+	public String toString() {
+		return "BTransaction [id=" + id + ", srcCardNo=" + srcCardNo + ", dstCardNo=" + dstCardNo
+				+ ", transactionAmount=" + transactionAmount + ", availableAmount=" + availableAmount + ", usedAmount="
+				+ usedAmount + ", payCash=" + payCash + ", transactionId=" + transactionId + ", createdAt=" + createdAt
+				+ "]";
+	}
+     
+    
+  
 
 }
