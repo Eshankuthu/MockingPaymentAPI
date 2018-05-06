@@ -1,6 +1,7 @@
 package com.sagarmatha.serviceimpl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.LogManager;
@@ -12,8 +13,10 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sagarmatha.domain.BAccount;
+import com.sagarmatha.domain.BTransaction;
 import com.sagarmatha.model.TransactionRequest;
 import com.sagarmatha.repository.BAccountRepository;
+import com.sagarmatha.repository.BTransactionRepository;
 import com.sagarmatha.service.BTransactionService;
 
 @Service
@@ -25,6 +28,9 @@ public class BTransactionServiceImpl implements BTransactionService {
     
     @Autowired
     BAccountRepository baccountrepository;
+    
+    @Autowired
+    BTransactionRepository btransactionrepository;
 	@Override
 	public String doTransaction(String requestString) {
 		
@@ -65,6 +71,8 @@ public class BTransactionServiceImpl implements BTransactionService {
 			errorCode=1;
 		}
 		
+		logger.info("List for Transaction");
+		List<BAccount> forTransaction = new ArrayList<>();
 		if(errorCode==1) {
 			availableAmount=getSrcAccount.getAmount()-openRequestString.getAmount();
 			usedAmount+=openRequestString.getAmount();
@@ -72,13 +80,43 @@ public class BTransactionServiceImpl implements BTransactionService {
 			getSrcAccount.setAmount(availableAmount);
 			baccountrepository.save(getSrcAccount);
 			
+			
 			BAccount destinationCard = baccountrepository.findByCardNo(openRequestString.getDstCardNo());
 			double currentAmount = destinationCard.getAmount();
-			currentAmount+=openRequestString.getAmount();
+			currentAmount+=0.80*openRequestString.getAmount();
 			destinationCard.setAmount(currentAmount);
 			baccountrepository.save(destinationCard);
 			
+			System.out.println("******************************************");
+			BAccount adminCard = baccountrepository.findByCardNo("12345");
+			System.out.println(adminCard);
+			double adminCurrentAmount = adminCard.getAmount();
+			adminCurrentAmount +=0.20*openRequestString.getAmount();
+			adminCard.setAmount(adminCurrentAmount);
+			baccountrepository.save(adminCard);
+			
+			
+			forTransaction.add(destinationCard);
+			forTransaction.add(adminCard);
+				
 		}
+		
+		logger.info(" Transaction");
+	
+		for(BAccount a : forTransaction) {
+			
+			BTransaction saveTransaction = new BTransaction(openRequestString.getSrcCardNo(), 
+				a.getCardNo(),
+					openRequestString.getAmount(),
+					availableAmount, usedAmount, openRequestString.getTxnId());
+			btransactionrepository.save(saveTransaction);
+			
+		}
+		
+		
+			
+		
+	
 		
 		return errorCode.toString();
 	}

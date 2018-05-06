@@ -46,7 +46,7 @@ public class OrderController {
        destionationscard.add("1212121221");
         String responseCode = orderservice.doTransaction("111", paymentForm.getCardNumber(),
             paymentForm.getCardExpirationDate(), paymentForm.getCardHolderName(), paymentForm.getCvv(),
-            paymentForm.getCardZipcode(), (double) 3000, "789456123",destionationscard);
+            paymentForm.getCardZipcode(), (double) 100, "789456123",destionationscard);
         
         if(responseCode.equals("5")){
         	model.addAttribute("error", "Please Enter the Correct Card Detail");
